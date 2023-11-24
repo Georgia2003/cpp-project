@@ -1,5 +1,5 @@
 ﻿#include "Ticket.cpp"
-#include "Movie.cpp"
+#include "Event.cpp"
 
 /*The Ticketing App
 
@@ -78,12 +78,16 @@ BONUS :
 using namespace std;
 
 
-
 int main() {
-	Movie a;
-	a.setNumberOfSeats(350);
-	a.printNumberOfSeats();
-	//cout << a;
+	Event a;
+	int v[] = { 1,2,3,4,5,6,7,8 };
+	//aici se apeleaza copyconstructiorul sau fucntia egal Movie b = a;
+	a.setDate(v);
+	a.setTime("1200");
+	cout << a;
+	//Movie test(-3, 2, 11, "13:12", "andrei");
+	//cout << test;
 	return 0;
+
 }
 
