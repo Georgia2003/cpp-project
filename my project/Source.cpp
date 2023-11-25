@@ -80,6 +80,35 @@ int Location::noOfLocations = 0;
 
 using namespace std;
 
+ostream& operator<<(ostream& output, const Event& event)
+{
+    output << "The name of this Event is: " << event.nameOfEvent << endl;
+    output << "The date is: ";
+    for (int i = 0; i < Event::date_length; i++)
+        output << event.date[i];
+    output << endl << "The time is: " << event.time << endl;
+
+    return output;
+}
+
+istream& operator>>(istream& input, Event& Event)
+{
+    input >> Event.nameOfEvent;
+
+    char date[1000], time[1000];
+    int v[1000];
+    input.getline(date, 1000);
+    for (int i = 0; i < strlen(date); i++)
+    {
+        v[i] = date[i] - '0';
+    }
+    Event.setDate(v);
+
+    input.getline(time, 1000);
+    Event.setTime(time);
+
+    return input;
+}
 
 int main() {
     Event a;

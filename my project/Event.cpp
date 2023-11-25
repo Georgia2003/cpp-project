@@ -4,32 +4,17 @@
 
 using namespace std;
 
+
 class Event {
 
 private:
     int* date = nullptr;
     char* time = nullptr;
-    const int date_length = 8;
+    const static int date_length = 8;
     string nameOfEvent = " ";
 
 public:
-    //default constructor
-    Event()
-    {
-    }
 
-    Event(string nameOfEvent, int* date, const char* time)
-    {
-        this->setDate(date);
-        this->setTime(time);
-        this->setNameOfEvent(nameOfEvent);
-    }
-
-    ~Event()
-    {
-        delete[] this->date;
-        delete[] this->time;
-    }
 
     int* getDate()
     {
@@ -46,14 +31,14 @@ public:
             }
         }
 
-        if (date[date_length] != 0)
-        {
-            throw exception("the date should look like DD/MM/YYYY");
-        }
+
 
         delete[] this->date;
         this->date = new int[date_length];
-        memcpy(this->date, date, sizeof(int) * date_length);
+        for (int i = 0; i < Event::date_length; i++) {
+            this->date[i] = date[i];
+        }
+        //memcpy(this->date, date, sizeof(int) * date_length);
     }
 
     char* getTime()
@@ -93,10 +78,28 @@ public:
     void setNameOfEvent(string nameOfEvent)
     {
         if (nameOfEvent.size() > 50) {
-            throw std::invalid_argument("this name is too long. please enter a shorter name  Eg.: MGF, ASR etc.");
+            throw exception("this name is too long. please enter a shorter name  Eg.: MGF, ASR etc.");
         }
 
         this->nameOfEvent = nameOfEvent;
+    }
+
+    //default constructor
+    Event()
+    {
+    }
+
+    Event(string nameOfEvent, int* date, const char* time)
+    {
+        this->setDate(date);
+        this->setTime(time);
+        this->setNameOfEvent(nameOfEvent);
+    }
+
+    ~Event()
+    {
+        delete[] this->date;
+        delete[] this->time;
     }
 
     bool operator !=(const Event& event)
@@ -153,33 +156,9 @@ public:
             return false;
     }
 
-    friend ostream& operator<<(ostream& output, const Event& Event)
-    {
-        output << "The name of this Event is: " << Event.nameOfEvent << endl;
-        output << "The date is: " << Event.date << endl;
-        output << "The time is: " << Event.time << endl;
+    friend ostream& operator<<(ostream& output, const Event& event);
 
-        return output;
-    }
-
-    friend istream& operator>>(istream& input, Event& Event)
-    {
-        input >> Event.nameOfEvent;
-
-        char date[1000], time[1000];
-        int v[1000];
-        input.getline(date, 1000);
-        for (int i = 0; i < strlen(date); i++)
-        {
-            v[i] = date[i] - '0';
-        }
-        Event.setDate(v);
-
-        input.getline(time, 1000);
-        Event.setTime(time);
-
-        return input;
-    }
+    friend istream& operator>>(istream& input, Event& Event);
 };
 
 
