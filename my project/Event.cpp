@@ -48,17 +48,24 @@ public:
 
     void setTime(const char* time)
     {
-        if (strlen(time) != 4)
+        if (strlen(time) != 5)
         {
             throw exception("the time should look like HH:MM");
         }
 
         for (int i = 0; i < strlen(time); i++)
         {
-            if (time[i] < '0' || time[i] > '9')
-            {
-                throw exception("the time should look like HH:MM");
+            if(i != 2) {
+                if(time[i] < '0' || time[i] > '9')
+                {
+                    throw exception("the time should look like HH:MM");
+
+                }
             }
+            else if (time[2] != ':') {
+                throw std::invalid_argument("The time should look like HH:MM");
+            }
+
         }
         delete[] this->time;
         this->time = new char[strlen(time) + 1];

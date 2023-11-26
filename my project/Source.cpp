@@ -112,10 +112,10 @@ istream& operator>>(istream& input, Event& Event)
 
 int main() {
     Event a;
-    int v[] = { 1,2,3,4,5,6,7,8 };
-    //aici se apeleaza copyconstructiorul sau fucntia egal Movie b = a;
+    int v[] = { 1,2,3,4,5,6,7,8};
+  
     a.setDate(v);
-    a.setTime("1200");
+    a.setTime("12:00");
     cout << a;
     //Movie test(-3, 2, 11, "13:12", "andrei");
     //cout << test;
