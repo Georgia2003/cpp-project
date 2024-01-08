@@ -129,6 +129,7 @@
   <ItemGroup>
     <ClCompile Include="Event.cpp" />
     <ClCompile Include="Location.cpp" />
+    <ClCompile Include="phase 2.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="Ticket.cpp" />
   </ItemGroup>
