@@ -1,6 +1,7 @@
 ﻿#include "Ticket.cpp"
 #include "Event.cpp"
 #include "Location.cpp"
+#include "menu.cpp"
 
 /*The Ticketing App
 
@@ -110,7 +111,7 @@ istream& operator>>(istream& input, Event& Event)
     return input;
 }
 
-int main() {
+int main(int argc, char* argv[]) {
     Event a;
     int v[] = { 1,2,3,4,5,6,7,8};
   
@@ -119,7 +120,38 @@ int main() {
     cout << a;
     //Movie test(-3, 2, 11, "13:12", "andrei");
     //cout << test;
+
+    Ticket Ticket;
+
+    menu();
+
+    if (argc == 1) {
+        // No command line arguments provided, interact with the user through the console
+        // Your existing code for console interaction goes here
+    }
+    else if (argc == 2) {
+        // One command line argument provided, assume it is a filename
+        const char* filename = argv[1];
+        ifstream file(filename);
+
+        if (file.is_open()) {
+            // File opened successfully, read input from the file
+            // Your existing code for file input goes here
+            file.close();
+        }
+        else {
+            cout << "Error opening file: " << filename << endl;
+        }
+    }
+    else {
+        cout << "Usage: " << argv[0] << " [filename]" << endl;
+        cout << "If filename is provided, read input from the file; otherwise, interact with the user through the console." << endl;
+    }
+    Ticket.saveToFile("tickets.dat");//save
+    ticket loadTicket = ticket::loadFromFile("tickets.dat");//load
+
     return 0;
 
 }
+
 

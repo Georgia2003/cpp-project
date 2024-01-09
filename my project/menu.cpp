@@ -2,7 +2,8 @@
 
 #include <iostream>
 #include <fstream>  // Required for file operations
-#include"Ticket.cpp"
+#include "Ticket.cpp"
+#include "phase2.cpp"
 using namespace std;
 
 
