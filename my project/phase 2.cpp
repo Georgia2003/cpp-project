@@ -1,7 +1,10 @@
+#pragma once
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include <cstring>
 #include <stdexcept>
+
 
 using namespace std;
 
@@ -64,7 +67,7 @@ private:
 
 public:
     Ticket() {
-        this->Id++;
+        Id++;
     }
 
     void SaveToFile(const char* fileName) {
@@ -98,10 +101,10 @@ public:
     }
 };
 
-int Ticket::Id = 0;
+
 
 class VIP_Ticket : public Ticket {
-
+    // VIP Ticket specific implementations (if any)
 };
 
 class Event {
@@ -136,6 +139,7 @@ public:
         }
 
         delete[] date;
+        date = new int[date_length];
         inFile.read(reinterpret_cast<char*>(date), sizeof(int) * date_length);
 
         int timeLength;
@@ -153,10 +157,11 @@ public:
 
 int main(int argc, char* argv[]) {
     if (argc > 1) {
-
+        // Command-line argument handling (if needed)
     }
     else {
-        int choice;
+        int choice; // Changed from size_t to int
+
         vector<Ticket> tickets;
         Location location;
         Event event;
@@ -170,38 +175,42 @@ int main(int argc, char* argv[]) {
             cout << "Enter your choice: ";
             cin >> choice;
 
-            if (choice == 1) {
+            switch (choice) {
+            case 1: {
                 Ticket newTicket;
                 tickets.push_back(newTicket);
+                break;
             }
-            else if (choice == 2) {
-                for (const Ticket& ticket : tickets) {
-                    //ticket.printTicket();
-                }
-                location.displayLocation();
+            case 2: {
+                // Implement the logic to display ticket and location details
+                break;
             }
-            else if (choice == 3) {
+            case 3: {
                 location.SaveToFile("location_data.bin");
                 for (Ticket& ticket : tickets) {
                     ticket.SaveToFile("ticket_data.bin");
                 }
                 event.SaveToFile("event_data.bin");
+                break;
             }
-            else if (choice == 4) {
+            case 4: {
                 location.LoadFromFile("location_data.bin");
-                tickets.clear();
+                // Implement logic to load multiple tickets if needed
                 Ticket loadedTicket;
                 loadedTicket.LoadFromFile("ticket_data.bin");
                 tickets.push_back(loadedTicket);
                 event.LoadFromFile("event_data.bin");
+                break;
             }
-            else if (choice == 5) {
-                // Exit
+            case 5: {
+                // Exit the program
+                break;
             }
-            else {
+            default: {
                 cout << "Invalid choice. Please try again.\n";
+                break;
             }
-
+            }
         } while (choice != 5);
     }
 

@@ -1,6 +1,5 @@
-﻿#include "Ticket.cpp"
-#include "Event.cpp"
-#include "Location.cpp"
+﻿
+
 
 /*The Ticketing App
 
@@ -71,14 +70,18 @@ BONUS :
     In this case the use of third party libraries is allowed to create the PDF file
 
 */
+#include<iostream>
+#include<string>
+#include "Ticket.cpp"
+#include "Event.cpp"
+#include "Location.cpp"
+
 
 int Ticket::Id = 0;
 int Location::noOfLocations = 0;
 
-#include<iostream>
-#include<string>
 
-using namespace std;
+
 
 ostream& operator<<(ostream& output, const Event& event)
 {
@@ -110,7 +113,7 @@ istream& operator>>(istream& input, Event& Event)
     return input;
 }
 
-int main() {
+/*int main() {
     Event a;
     int v[] = { 1,2,3,4,5,6,7,8};
   
@@ -121,5 +124,5 @@ int main() {
     //cout << test;
     return 0;
 
-}
+}*/
 

@@ -1,5 +1,6 @@
 #include<iostream>
 #include<string>
+#pragma once 
 #include<stdexcept>
 
 using namespace std;
