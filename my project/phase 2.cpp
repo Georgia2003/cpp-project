@@ -67,8 +67,6 @@ public:
         this->Id++;
     }
 
-    
-
     void SaveToFile(const char* fileName) {
         ofstream outFile(fileName, ios::binary | ios::app);
         if (!outFile.is_open()) {
@@ -98,14 +96,12 @@ public:
 
         inFile.close();
     }
-
-    
 };
 
 int Ticket::Id = 0;
 
 class VIP_Ticket : public Ticket {
-   
+
 };
 
 class Event {
@@ -116,8 +112,6 @@ private:
     string nameOfEvent = " ";
 
 public:
-    
-
     void SaveToFile(const char* fileName) {
         ofstream outFile(fileName, ios::binary);
         if (!outFile.is_open()) {
@@ -159,7 +153,7 @@ public:
 
 int main(int argc, char* argv[]) {
     if (argc > 1) {
-        
+
     }
     else {
         int choice;
@@ -176,44 +170,38 @@ int main(int argc, char* argv[]) {
             cout << "Enter your choice: ";
             cin >> choice;
 
-            switch (choice) {
-            case 1:
-               
+            if (choice == 1) {
                 Ticket newTicket;
-               
                 tickets.push_back(newTicket);
-                break;
-            case 2:
-                
+            }
+            else if (choice == 2) {
                 for (const Ticket& ticket : tickets) {
                     //ticket.printTicket();
                 }
                 location.displayLocation();
-               
-                break;
-            case 3:
-               
+            }
+            else if (choice == 3) {
                 location.SaveToFile("location_data.bin");
                 for (Ticket& ticket : tickets) {
                     ticket.SaveToFile("ticket_data.bin");
                 }
                 event.SaveToFile("event_data.bin");
-                break;
-            case 4:
-               
+            }
+            else if (choice == 4) {
                 location.LoadFromFile("location_data.bin");
                 tickets.clear();
                 Ticket loadedTicket;
                 loadedTicket.LoadFromFile("ticket_data.bin");
                 tickets.push_back(loadedTicket);
                 event.LoadFromFile("event_data.bin");
-                break;
-            case 5:
-                
-                break;
-            default:
+            }
+            else if (choice == 5) {
+                // Exit
+            }
+            else {
                 cout << "Invalid choice. Please try again.\n";
             }
+
         } while (choice != 5);
     }
 
